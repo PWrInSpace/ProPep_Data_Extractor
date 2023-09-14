@@ -28,7 +28,7 @@ for line in lines:
         T.append("")
         k.append("")
         cstar.append("")
-        print("Run: ", Run)
+        print("\nRun: ", Run)
 
     if ("THE MOLECULAR WEIGHT OF THE MIXTURE IS" in line and M[Run-1] == ""):
         for char in line:
@@ -85,6 +85,11 @@ rows = [["Run","Molecular weight", "Specific impulse", "Isentropic exponent", "T
 for row in range(Run):
     rows.append([row+1, M[row], Isp[row], k[row], T[row], cstar[row]])
 writer.writerows(rows)
+
+#Optimum Run
+print("\nOptimum run is: ", 1+cstar.index(max(cstar)), " With Isp of: ", Isp[cstar.index(max(cstar))], " s")
+print("\nPress Enter to continue...")
+input()
 
 file.close()
 output.close()

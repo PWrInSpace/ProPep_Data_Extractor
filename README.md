@@ -1,4 +1,4 @@
-# ProPep_Data_Extractor
+# ProPep Data Extractor
 
 The <i>ProPep Data Extractor</i> is a script that can extract values of molecular weight, specific impulse, isentropic exponent, total temperature, and characteristic velocity from <a href="http://www.nakka-rocketry.net/th_prope.html">ProPep</a> multiple run output file.
 

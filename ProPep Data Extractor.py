@@ -31,11 +31,19 @@ for line in lines:
         print("\nRun: ", Run)
 
     if ("THE MOLECULAR WEIGHT OF THE MIXTURE IS" in line and M[Run-1] == ""):
+        i2 = 0
         for char in line:
             if char.isnumeric() or char == ",":
+                i2 = 0
                 if char == ",":
                       char = "."
                 M[Run-1] = M[Run-1]+char
+            i2 = i2+1
+            if i2 > 48:
+                M[Run-1] = -1
+                i2 = 0
+                break
+
         M[Run-1] = float(M[Run-1])
         print("Molecular weight: ", M[Run-1], " g/mol")
     if ("IMPULSE" in line):
@@ -44,10 +52,12 @@ for line in lines:
 
     if dataFlag == True:
         i = 0 # 0 - ISP, 1 - k, 2 - T*, 4 - c*
+        i2 = 0
         nextFlag = False
         for char in line:
             if char.isnumeric() or char == ",":
                 nextFlag = True
+                i2 = 0
                 if char == ",":
                     char = "."
                 if i == 0: # Isp
@@ -71,6 +81,18 @@ for line in lines:
                 print("Isentropic exponent: ", k[Run-1])
                 print("Total temperature: ", T[Run-1], " K")
                 print("Characteristic velocity: ", cstar[Run-1], " m/s")
+                break
+            i2 = i2+1
+            if i2 > 5:
+                Isp[Run-1] = -1
+                k[Run-1] = -1
+                T[Run-1] = -1
+                cstar[Run-1] = -1
+                print("Specific impulse: ", Isp[Run-1], " s")
+                print("Isentropic exponent: ", k[Run-1])
+                print("Total temperature: ", T[Run-1], " K")
+                print("Characteristic velocity: ", cstar[Run-1], " m/s")
+                i2 = 0
                 break
         dataFlag = False
 

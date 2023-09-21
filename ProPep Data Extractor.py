@@ -83,7 +83,7 @@ for line in lines:
                 print("Characteristic velocity: ", cstar[Run-1], " m/s")
                 break
             i2 = i2+1
-            if i2 > 5:
+            if i2 > 8:
                 Isp[Run-1] = -1
                 k[Run-1] = -1
                 T[Run-1] = -1
@@ -97,7 +97,7 @@ for line in lines:
         dataFlag = False
 
 
-output = open("output.csv", "w")
+output = open("output.csv", "w", newline='')
 writer = csv.writer(output)
 
 rows = [["Run","Molecular weight", "Specific impulse", "Isentropic exponent", "Total temperature", "Characeteristic velocity"], 

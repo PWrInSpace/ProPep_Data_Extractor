@@ -33,7 +33,7 @@ for line in lines:
     if ("THE MOLECULAR WEIGHT OF THE MIXTURE IS" in line and M[Run-1] == ""):
         i2 = 0
         for char in line:
-            if char.isnumeric() or char == ",":
+            if char.isnumeric() or char == "," or char == ".":
                 i2 = 0
                 if char == ",":
                       char = "."
@@ -55,7 +55,7 @@ for line in lines:
         i2 = 0
         nextFlag = False
         for char in line:
-            if char.isnumeric() or char == ",":
+            if char.isnumeric() or char == "," or char == ".":
                 nextFlag = True
                 i2 = 0
                 if char == ",":

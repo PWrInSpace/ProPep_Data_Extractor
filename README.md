@@ -8,4 +8,4 @@ The ProPep output file should be saved as <i>"data.txt"</i> and placed in the sa
 
 
 
-pyinstaller --onefile -w 'ProPep Data Extractor.py'
+pyinstaller --onefile 'ProPep Data Extractor.py'

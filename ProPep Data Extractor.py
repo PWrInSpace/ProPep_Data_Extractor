@@ -1,11 +1,24 @@
 import csv
 
+
+print("minimum Oxidizer percentage: ")
+ox_min = float(input())
+
+print("maximum Oxidizer percentage: ")
+ox_max = float(input())
+
+print("number of steps: ")
+steps = int(input())
+
+step = (ox_max-ox_min)/steps
+
 file = open("data.txt", "r")
 
 lines = file.readlines()
 
 
 Run = 1
+OF = []
 M = []
 dataFlag = False
 Isp = []
@@ -22,7 +35,8 @@ for line in lines:
             if char == "o":
                 break
         Run = int(Run)
-        
+        ox_percentage = ox_min + step*(Run-1)
+        OF.append(ox_percentage / (100-ox_percentage))
         M.append("")
         Isp.append("")
         T.append("")
@@ -83,7 +97,7 @@ for line in lines:
                 print("Characteristic velocity: ", cstar[Run-1], " m/s")
                 break
             i2 = i2+1
-            if i2 > 8:
+            if i2 > 5:
                 Isp[Run-1] = -1
                 k[Run-1] = -1
                 T[Run-1] = -1
@@ -97,19 +111,21 @@ for line in lines:
         dataFlag = False
 
 
-output = open("output.csv", "w", newline='')
+output = open("output.csv", "w", newline="")
 writer = csv.writer(output)
 
-rows = [["Run","Molecular weight", "Specific impulse", "Isentropic exponent", "Total temperature", "Characeteristic velocity"], 
-        ["N/A","[g/mol]", "[sec]", "[-]", "[K]", "[m/s]"]]
+rows = [["Run", "OF","Molecular weight", "Specific impulse", "Isentropic exponent", "Total temperature", "Characeteristic velocity"], 
+        ["N/A", "N/A","[g/mol]", "[sec]", "[-]", "[K]", "[m/s]"]]
 
 
 for row in range(Run):
-    rows.append([row+1, M[row], Isp[row], k[row], T[row], cstar[row]])
+    rows.append([row+1, OF[row], M[row], Isp[row], k[row], T[row], cstar[row]])
 writer.writerows(rows)
 
 #Optimum Run
-print("\nOptimum run is: ", 1+cstar.index(max(cstar)), " With Isp of: ", Isp[cstar.index(max(cstar))], " s")
+optimum_run = cstar.index(max(cstar))
+print("\nOptimum run is: ", 1+optimum_run, " With Isp of: ", Isp[cstar.index(max(cstar))], " s")
+print("Optimum OF: ", OF[optimum_run])
 print("\nPress Enter to continue...")
 input()
 

@@ -5,3 +5,7 @@ The <i>ProPep Data Extractor</i> is a script that can extract values of molecula
 For now, the script only looks for frozen flow parameters and the molecular weight is taken from the Chamber Flow section
 
 The ProPep output file should be saved as <i>"data.txt"</i> and placed in the same folder as the <i>.py</i> file. The result of the script running is generated as a <i>output.csv</i> file in the same directory.
+
+
+
+pyinstaller --onefile -w 'ProPep Data Extractor.py'
